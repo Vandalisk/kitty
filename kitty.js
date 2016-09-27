@@ -68,10 +68,10 @@ $(document).ready(function() {
 
   function initElements(){
     $.each(cats, function(catId, cat) {
-      var cat_div = createNewCat(catId),
+      var catDiv = createNewCat(catId),
           name = createName(catId);
-      cat_div.append(name);
-      $('.cats').append(cat_div);
+      catDiv.append(name);
+      $('.cats').append(catDiv);
     });
 
     var initArea = createInitArea();
@@ -88,8 +88,8 @@ $(document).ready(function() {
     $('.init-area').click(function(e){
       var el = $(this).find('.cat-area'),
           catId = el.attr('id');
-      var clicks_count = cats[catId].clicks_count += 1;
-      el.find('.clicker .counter').text(clicks_count);
+      var clicksCount = cats[catId].clicks_count += 1;
+      el.find('.clicker .counter').text(clicksCount);
     });
   }
 });

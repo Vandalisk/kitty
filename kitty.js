@@ -1,5 +1,6 @@
+"use strict"
 $(document).ready(function() {
-  cats = [
+  var cats = [
     {
       clicks_count: 0,
       name: 'Cat 1',
@@ -22,75 +23,74 @@ $(document).ready(function() {
     },
   ]
 
-  createNewCat = function(catId){
+  initElements();
+  initEvents();
+
+  function createNewCat(catId){
     return $("<div>", {id: catId, "class": "cat"});
   }
-  createClicker = function(catId){
-    span = $("<span>", {"class": 'counter', "text": cats[catId].clicks_count});
-    text = "This is kitty clicker " + catId + ": ";
-    div = $("<div>", {"class": "clicker", "text": text});
+  function createClicker(catId){
+    var span = $("<span>", {"class": 'counter', "text": cats[catId].clicks_count}),
+        text = "This is kitty clicker " + catId + ": ",
+        div = $("<div>", {"class": "clicker", "text": text});
     div.append(span);
     return div;
   }
-  createName = function(catId){
+  function createName(catId){
     return $("<div>", {"class": "name", "text": cats[catId].name});
   }
-  createImage = function(catId){
+  function createImage(catId){
     return $("<img>", {"src": cats[catId].image_path});
   }
-  createArea = function(catId){
-    return $("<div>", {"class": "cat_area", "id": catId});
+  function createArea(catId){
+    return $("<div>", {"class": "cat-area", "id": catId});
   }
-  createInitArea = function(){
-    return $("<div>", {"class": "init_area"}).css({display: "inline-block"});
+  function createInitArea(){
+    return $("<div>", {"class": "init-area"});
   }
-  createCatArea = function(catId){
-    var catArea = createArea(catId);
-    var clicker = createClicker(catId);
-    var name = createName(catId);
-    var image = createImage(catId);
+  function createCatArea(catId){
+    var catArea = createArea(catId),
+        clicker = createClicker(catId),
+        name = createName(catId),
+        image = createImage(catId);
     catArea.append(clicker, name, image);
     return catArea;
   }
 
-  replaceCatArea = function(catId){
+  function replaceCatArea(catId){
     var newCatArea = createCatArea(catId);
-    $('.cat_area').replaceWith(newCatArea);
+    $('.cat-area').replaceWith(newCatArea);
   }
 
-  replaceCat = function(catId){
+  function replaceCat(catId){
     replaceCatArea(catId);
   }
 
-  initElements = function(){
+  function initElements(){
     $.each(cats, function(catId, cat) {
-      var cat_div = createNewCat(catId);
-      var name = createName(catId);
+      var cat_div = createNewCat(catId),
+          name = createName(catId);
       cat_div.append(name);
       $('.cats').append(cat_div);
     });
 
     var initArea = createInitArea();
-    $('.cats').append($("<p>"));
-    $('.cats').append(initArea);
+    $('.cats').append($("<p>"), initArea);
     initArea.append(createCatArea(0));
   }
 
-  initEvents = function(){
+  function initEvents(){
     $('.cat').click(function(){
       var catId = $(this).attr('id');
       replaceCat(catId);
     });
 
-    $('.init_area').click(function(e){
-      var el = $(this).find('.cat_area');
-      catId = el.attr('id');
+    $('.init-area').click(function(e){
+      var el = $(this).find('.cat-area'),
+          catId = el.attr('id');
       var clicks_count = cats[catId].clicks_count += 1;
       el.find('.clicker .counter').text(clicks_count);
     });
   }
-
-  initElements();
-  initEvents();
 });
 

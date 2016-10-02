@@ -4,9 +4,9 @@
   width: 10em;
   padding: 2em;
 }
+#cats-list{
+  padding-left: 0;
+}
 .cat:hover{
   background-color: #D6FDF4;
-}
-.init-area{
-  display: inline-block;
 }

@@ -55,10 +55,10 @@ var catView = {
         this.catImage = document.getElementById('cat-image');
 
         this.catImage.addEventListener("click", function(){
-        octopus.incrementCounter();
-    });
+            octopus.incrementCounter();
+        });
 
-    this.render();
+        this.render();
     },
 
     render: function(){
@@ -86,8 +86,8 @@ var catListView = {
 
             elem.addEventListener('click', (function(catCopy) {
                 return function() {
-                octopus.setCurrentCat(catCopy);
-                catView.render();
+                    octopus.setCurrentCat(catCopy);
+                    catView.render();
                 };
             })(cat));
 
